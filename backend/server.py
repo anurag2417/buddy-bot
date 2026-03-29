@@ -20,7 +20,7 @@ import resend
 from datetime import datetime, timezone, timedelta
 from pydantic import BaseModel, EmailStr
 from typing import List, Optional, Dict
-from emergentintegrations.llm.chat import LlmChat, UserMessage
+from groq import AsyncGroq
 import httpx
 
 # Import database and models
@@ -28,7 +28,41 @@ from database import get_db, engine, Base
 from models import User, ChildProfile, Conversation, Message, Alert, BrowsingPacket
 
 # LLM
-EMERGENT_LLM_KEY = os.environ['EMERGENT_LLM_KEY']
+GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '')
+EMERGENT_LLM_KEY = GROQ_API_KEY # Kept for variable compatibility
+groq_client = AsyncGroq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
+
+class UserMessage:
+    def __init__(self, text: str):
+        self.text = text
+
+class LlmChat:
+    def __init__(self, api_key: str, session_id: str, system_message: str):
+        self.api_key = api_key
+        self.session_id = session_id
+        self.system_message = system_message
+        self.model = "llama3-8b-8192"
+        self.history = [{"role": "system", "content": self.system_message}]
+
+    def with_model(self, provider: str, model: str):
+        if "mini" in model:
+            self.model = "llama3-8b-8192"
+        else:
+            self.model = "llama3-70b-8192"
+        return self
+
+    async def send_message(self, message: UserMessage) -> str:
+        if not groq_client:
+            raise Exception("GROQ_API_KEY is missing or invalid.")
+        self.history.append({"role": "user", "content": message.text})
+        response = await groq_client.chat.completions.create(
+            messages=self.history,
+            model=self.model,
+            temperature=0.7,
+        )
+        content = response.choices[0].message.content
+        self.history.append({"role": "assistant", "content": content})
+        return content
 
 # JWT
 JWT_SECRET = os.environ['JWT_SECRET']
