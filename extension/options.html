@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuddyBot - Parent Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div id="app">
+    <!-- PIN Gate -->
+    <div id="pin-gate">
+      <div class="center-card">
+        <img src="icons/icon128.png" alt="BuddyBot" class="big-logo">
+        <h1>Parent Settings</h1>
+        <p class="subtitle">Enter your PIN to access settings</p>
+        <input type="password" id="gate-pin" class="pin-input" placeholder="Enter PIN" maxlength="6">
+        <p id="gate-error" class="error-text" style="display:none;">Incorrect PIN</p>
+        <button id="gate-submit" class="btn btn-primary">Unlock</button>
+        <p class="hint" id="no-pin-hint">No PIN set yet? <button id="skip-pin" class="link-btn">Set up now</button></p>
+      </div>
+    </div>
+
+    <!-- Settings View -->
+    <div id="settings-view" style="display:none;">
+      <div class="settings-header">
+        <img src="icons/icon48.png" alt="BuddyBot" class="logo">
+        <h1>Parent Settings</h1>
+      </div>
+
+      <div class="settings-section">
+        <h2>Connection</h2>
+        <div class="field">
+          <label>BuddyBot Server URL</label>
+          <input type="url" id="backend-url" class="text-input" placeholder="https://your-buddybot-app.com">
+          <p class="hint">The URL of your BuddyBot web app (where the Parent Dashboard is)</p>
+        </div>
+        <div class="field">
+          <label>Device ID</label>
+          <input type="text" id="device-id" class="text-input" readonly>
+          <p class="hint">Auto-generated. Used to identify this device.</p>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2>Security</h2>
+        <div class="field">
+          <label>Parent PIN</label>
+          <input type="password" id="pin-field" class="text-input" placeholder="Set a 4-6 digit PIN" maxlength="6">
+          <p class="hint">Required to access settings or pause monitoring</p>
+        </div>
+        <div class="field">
+          <label>Confirm PIN</label>
+          <input type="password" id="pin-confirm" class="text-input" placeholder="Confirm PIN" maxlength="6">
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2>Incognito Mode</h2>
+        <div class="guide-card">
+          <h3>How to Enable Incognito Monitoring</h3>
+          <ol>
+            <li>Open <strong>chrome://extensions</strong> in your browser</li>
+            <li>Find <strong>"BuddyBot Safety Monitor"</strong></li>
+            <li>Click <strong>"Details"</strong></li>
+            <li>Toggle <strong>"Allow in Incognito"</strong> to ON</li>
+          </ol>
+          <p class="warning-text">Without this, the extension cannot monitor Incognito browsing. Children may bypass safety filters using Incognito mode.</p>
+        </div>
+      </div>
+
+      <div class="settings-section">
+        <h2>Data Management</h2>
+        <div class="field">
+          <button id="clear-data-btn" class="btn btn-danger">Clear All Local Data</button>
+          <p class="hint">Removes all locally stored browsing packets. Server data is not affected.</p>
+        </div>
+      </div>
+
+      <div class="save-bar">
+        <p id="save-status" class="save-status"></p>
+        <button id="save-btn" class="btn btn-primary">Save Settings</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

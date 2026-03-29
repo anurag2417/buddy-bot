@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BuddyBot Safety Monitor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Main View -->
+    <div id="main-view">
+      <div class="header">
+        <img src="icons/icon48.png" alt="BuddyBot" class="logo">
+        <div>
+          <h1>BuddyBot</h1>
+          <p class="subtitle">Safety Monitor</p>
+        </div>
+      </div>
+
+      <div class="status-card" id="status-card">
+        <div class="status-row">
+          <span class="status-dot active" id="status-dot"></span>
+          <span id="status-text">Active &amp; Monitoring</span>
+        </div>
+        <div class="stats-grid">
+          <div class="stat">
+            <span class="stat-value" id="pending-count">0</span>
+            <span class="stat-label">Pending</span>
+          </div>
+          <div class="stat">
+            <span class="stat-value" id="sync-status">--</span>
+            <span class="stat-label">Sync</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <!-- <button id="toggle-btn" class="btn btn-primary">Pause Monitoring</button> -->
+        <button id="toggle-btn" class="btn btn-primary" disabled style="opacity: 0.6; cursor: not-allowed;">Monitoring Enabled</button>
+        <button id="sync-btn" class="btn btn-secondary">Sync Now</button>
+        <button id="settings-btn" class="btn btn-outline">Parent Settings</button>
+      </div>
+
+      <div class="recent-section">
+        <h3>Recent Activity</h3>
+        <div id="recent-list" class="recent-list">
+          <p class="empty-msg">No recent activity</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>&#x1F6E1; BuddyBot is keeping kids safe online</p>
+      </div>
+    </div>
+
+    <!-- PIN Entry View -->
+    <div id="pin-view" style="display:none;">
+      <div class="header">
+        <img src="icons/icon48.png" alt="BuddyBot" class="logo">
+        <div>
+          <h1>Parent Access</h1>
+          <p class="subtitle">Enter your PIN</p>
+        </div>
+      </div>
+      <div class="pin-section">
+        <input type="password" id="pin-input" class="pin-input" placeholder="Enter 4-digit PIN" maxlength="6">
+        <p id="pin-error" class="error-text" style="display:none;">Incorrect PIN</p>
+        <button id="pin-submit" class="btn btn-primary">Unlock</button>
+        <button id="pin-cancel" class="btn btn-outline">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

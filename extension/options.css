@@ -1,0 +1,275 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+  background: linear-gradient(135deg, #f0f9ff, #f0fdf4);
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+h1, h2, h3 {
+  font-family: 'Nunito', sans-serif;
+}
+
+#app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* PIN Gate */
+#pin-gate {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+}
+
+.center-card {
+  background: white;
+  border-radius: 28px;
+  padding: 40px;
+  text-align: center;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 400px;
+}
+
+.big-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+
+.center-card h1 {
+  font-size: 24px;
+  font-weight: 800;
+  color: #0c4a6e;
+  margin-bottom: 4px;
+}
+
+.subtitle {
+  font-size: 14px;
+  color: #64748b;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.pin-input {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 50px;
+  border: 2px solid #e2e8f0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 8px;
+  outline: none;
+  margin-bottom: 12px;
+  transition: all 0.2s;
+}
+
+.pin-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 4px rgba(56,189,248,0.15);
+}
+
+.error-text {
+  color: #ef4444;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.btn-primary {
+  background: #38bdf8;
+  color: white;
+  box-shadow: 0 4px 0 0 rgba(14,165,233,0.3);
+}
+.btn-primary:hover {
+  background: #0ea5e9;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 rgba(14,165,233,0.3);
+}
+
+.btn-danger {
+  background: #f87171;
+  color: white;
+  box-shadow: 0 4px 0 0 rgba(239,68,68,0.3);
+}
+.btn-danger:hover { background: #ef4444; }
+
+.link-btn {
+  background: none;
+  border: none;
+  color: #0ea5e9;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+.hint {
+  font-size: 12px;
+  color: #94a3b8;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+/* Settings View */
+.settings-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 28px;
+}
+
+.logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+}
+
+.settings-header h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #0c4a6e;
+}
+
+.settings-section {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  border: 2px solid #e2e8f0;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+}
+
+.settings-section h2 {
+  font-size: 18px;
+  font-weight: 800;
+  color: #334155;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #f1f5f9;
+}
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field:last-child {
+  margin-bottom: 0;
+}
+
+.field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.text-input {
+  display: block;
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 14px;
+  border: 2px solid #e2e8f0;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  outline: none;
+  transition: all 0.2s;
+}
+
+.text-input:focus {
+  border-color: #38bdf8;
+  box-shadow: 0 0 0 4px rgba(56,189,248,0.1);
+}
+
+.text-input[readonly] {
+  background: #f8fafc;
+  color: #94a3b8;
+}
+
+/* Incognito Guide */
+.guide-card {
+  background: #fffbeb;
+  border-radius: 16px;
+  padding: 20px;
+  border: 2px solid #fde68a;
+}
+
+.guide-card h3 {
+  font-size: 15px;
+  font-weight: 800;
+  color: #92400e;
+  margin-bottom: 12px;
+}
+
+.guide-card ol {
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+
+.guide-card li {
+  font-size: 14px;
+  font-weight: 600;
+  color: #78350f;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.warning-text {
+  font-size: 13px;
+  font-weight: 700;
+  color: #dc2626;
+  background: #fef2f2;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #fecaca;
+}
+
+/* Save Bar */
+.save-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 0;
+}
+
+.save-bar .btn {
+  width: auto;
+  padding: 12px 40px;
+}
+
+.save-status {
+  font-size: 13px;
+  font-weight: 700;
+}

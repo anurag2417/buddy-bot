@@ -1,0 +1,50 @@
+{
+  "manifest_version": 3,
+  "name": "BuddyBot Safety Monitor",
+  "version": "1.0.0",
+  "description": "Keeps kids safe online by monitoring browsing activity and enhancing BuddyBot AI companion.",
+  "permissions": [
+    "tabs",
+    "storage",
+    "webNavigation",
+    "alarms"
+  ],
+  "host_permissions": [
+    "https://*.google.com/*",
+    "https://*.bing.com/*",
+    "https://*.youtube.com/*",
+    "https://*.duckduckgo.com/*",
+    "https://*.yahoo.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.google.com/search*",
+        "https://www.bing.com/search*",
+        "https://search.yahoo.com/search*",
+        "https://duckduckgo.com/*",
+        "https://www.youtube.com/results*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "options.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "incognito": "spanning"
+}
