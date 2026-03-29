@@ -33,6 +33,7 @@ export default function ExtensionSetup() {
 
     window.addEventListener("message", handleExtensionMessage);
     return () => window.removeEventListener("message", handleExtensionMessage);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const confirmExtension = async (devId) => {
