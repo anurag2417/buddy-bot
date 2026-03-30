@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "@/components/AuthContext";
 import ChatPage from "@/components/ChatPage";
 import LoginPage from "@/components/LoginPage";
@@ -35,13 +35,6 @@ function ProtectedRoute({ children, requirePasswordGate = false, requireExtensio
 }
 
 function AppRouter() {
-  const location = useLocation();
-
-  // CRITICAL: Detect session_id during render, before ProtectedRoute runs
-  if (location.hash?.includes("session_id=")) {
-    return <AuthCallback />;
-  }
-
   return (
     <Routes>
       <Route path="/" element={

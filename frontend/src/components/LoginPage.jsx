@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/components/AuthContext";
 import { Shield, Mail, Lock, User, Phone, ArrowRight } from "lucide-react";
 import axios from "axios";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "@/lib/firebase";
 
 const API = `${process.env.REACT_APP_BACKEND_URL}/api`;
 
@@ -42,10 +44,31 @@ export default function LoginPage() {
     setLoading(false);
   };
 
-  const handleGoogleLogin = () => {
-    // REMINDER: DO NOT HARDCODE THE URL, OR ADD ANY FALLBACKS OR REDIRECT URLS, THIS BREAKS THE AUTH
-    const redirectUrl = window.location.origin + "/auth/callback";
-    window.location.href = `https://auth.emergentagent.com/?redirect=${encodeURIComponent(redirectUrl)}`;
+  const handleGoogleLogin = async () => {
+    setError("");
+    setLoading(true);
+    try {
+      // Firebase Google popup sign-in
+      const result = await signInWithPopup(auth, googleProvider);
+      const idToken = await result.user.getIdToken();
+
+      // Send Firebase ID token to our backend
+      const res = await axios.post(
+        `${API}/auth/firebase`,
+        { id_token: idToken },
+        { withCredentials: true }
+      );
+      login(res.data);
+      navigate("/parent", { replace: true });
+    } catch (err) {
+      if (err.code === "auth/popup-closed-by-user") {
+        // User closed the popup, not an error
+        setLoading(false);
+        return;
+      }
+      setError(formatError(err.response?.data?.detail) || err.message || "Google sign-in failed");
+    }
+    setLoading(false);
   };
 
   return (

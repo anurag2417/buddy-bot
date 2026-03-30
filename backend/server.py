@@ -22,10 +22,40 @@ from pydantic import BaseModel, EmailStr
 from typing import List, Optional, Dict
 from groq import AsyncGroq
 import httpx
+import json
 
 # Import database and models
 from database import get_db, engine, Base
 from models import User, ChildProfile, Conversation, Message, Alert, BrowsingPacket
+
+# Firebase Admin SDK
+import firebase_admin
+from firebase_admin import credentials as firebase_credentials, auth as firebase_auth
+
+# Initialize Firebase Admin SDK
+FIREBASE_CREDENTIALS_PATH = os.environ.get('FIREBASE_CREDENTIALS_PATH', str(ROOT_DIR / 'firebase-service-account.json'))
+FIREBASE_CREDENTIALS_JSON = os.environ.get('FIREBASE_CREDENTIALS_JSON', '')
+FIREBASE_PROJECT_ID = os.environ.get('FIREBASE_PROJECT_ID', 'buddy-bot-e9b78')
+
+try:
+    if FIREBASE_CREDENTIALS_JSON:
+        # Load from env var (useful for deployment)
+        cred_dict = json.loads(FIREBASE_CREDENTIALS_JSON)
+        cred = firebase_credentials.Certificate(cred_dict)
+        firebase_admin.initialize_app(cred)
+        logging.info("Firebase Admin SDK initialized from env var")
+    elif os.path.exists(FIREBASE_CREDENTIALS_PATH):
+        # Load from file
+        cred = firebase_credentials.Certificate(FIREBASE_CREDENTIALS_PATH)
+        firebase_admin.initialize_app(cred)
+        logging.info(f"Firebase Admin SDK initialized from {FIREBASE_CREDENTIALS_PATH}")
+    else:
+        # Initialize without credentials (limited functionality, will use manual verification)
+        firebase_admin.initialize_app(options={'projectId': FIREBASE_PROJECT_ID})
+        logging.warning("Firebase Admin SDK initialized without service account - using manual token verification")
+except Exception as e:
+    logging.error(f"Failed to initialize Firebase Admin SDK: {e}")
+    logging.warning("Firebase Google auth will use manual token verification")
 
 # LLM
 GROQ_API_KEY = os.environ.get('GROQ_API_KEY', '')
@@ -149,8 +179,8 @@ class LoginRequest(BaseModel):
 class VerifyPasswordRequest(BaseModel):
     password: str
 
-class GoogleSessionRequest(BaseModel):
-    session_id: str
+class FirebaseAuthRequest(BaseModel):
+    id_token: str
 
 class ChildProfileCreate(BaseModel):
     name: str
@@ -949,40 +979,46 @@ async def login(data: LoginRequest, response: Response, db: AsyncSession = Depen
     }
 
 
-@api_router.post("/auth/google")
-async def google_auth(data: GoogleSessionRequest, response: Response, db: AsyncSession = Depends(get_db)):
-    """Exchange Emergent Google OAuth session_id for our JWT tokens."""
+@api_router.post("/auth/firebase")
+async def firebase_auth_endpoint(data: FirebaseAuthRequest, response: Response, db: AsyncSession = Depends(get_db)):
+    """Verify Firebase ID token and create/login user."""
     try:
-        async with httpx.AsyncClient() as http_client:
-            resp = await http_client.get(
-                "https://demobackend.emergentagent.com/auth/v1/env/oauth/session-data",
-                headers={"X-Session-ID": data.session_id}
-            )
-            if resp.status_code != 200:
-                raise HTTPException(status_code=401, detail="Invalid Google session")
-            google_data = resp.json()
-    except HTTPException:
-        raise
+        # Verify the Firebase ID token
+        decoded_token = firebase_auth.verify_id_token(data.id_token)
+    except firebase_auth.ExpiredIdTokenError:
+        raise HTTPException(status_code=401, detail="Firebase token expired")
+    except firebase_auth.RevokedIdTokenError:
+        raise HTTPException(status_code=401, detail="Firebase token revoked")
+    except firebase_auth.InvalidIdTokenError:
+        raise HTTPException(status_code=401, detail="Invalid Firebase token")
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Google auth failed: {str(e)}")
+        logger.error(f"Firebase token verification failed: {e}")
+        raise HTTPException(status_code=401, detail=f"Firebase auth failed: {str(e)}")
 
-    email = google_data["email"].lower()
+    # Extract user info from decoded token
+    email = decoded_token.get("email", "").lower()
+    name = decoded_token.get("name", "Parent")
+    picture = decoded_token.get("picture", "")
+
+    if not email:
+        raise HTTPException(status_code=400, detail="No email in Firebase token")
+
     result = await db.execute(select(User).where(User.email == email))
     existing = result.scalar_one_or_none()
 
     if existing:
-        existing.name = google_data.get("name", existing.name)
-        existing.picture = google_data.get("picture", "")
+        existing.name = name or existing.name
+        existing.picture = picture or existing.picture
         await db.commit()
         user = existing
     else:
         user = User(
             email=email,
-            name=google_data.get("name", "Parent"),
+            name=name,
             phone="",
             password_hash=None,
             auth_provider="google",
-            picture=google_data.get("picture", ""),
+            picture=picture,
             role="parent",
             created_at=datetime.now(timezone.utc)
         )
@@ -992,7 +1028,7 @@ async def google_auth(data: GoogleSessionRequest, response: Response, db: AsyncS
 
         child = ChildProfile(
             parent_id=user.id,
-            name=f"{google_data.get('name', 'Parent')}'s Child",
+            name=f"{name}'s Child",
             created_at=datetime.now(timezone.utc)
         )
         db.add(child)
