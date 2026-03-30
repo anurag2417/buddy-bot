@@ -11,13 +11,23 @@ load_dotenv(Path(__file__).parent / '.env')
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 from sqlalchemy.orm import declarative_base
 
+import ssl
+import os
 # Get database URL and convert to async
 DATABASE_URL = os.environ.get('DATABASE_URL')
 ASYNC_DATABASE_URL = DATABASE_URL.replace('postgresql://', 'postgresql+asyncpg://')
 
+# Force SSL connection compatible with Supabase pooler
+ssl_context = ssl.create_default_context()
+ssl_context.check_hostname = False
+ssl_context.verify_mode = ssl.CERT_NONE
+
+# Remove any unsupported query parameters the user typed in (like ?sslmode=require)
+clean_url = ASYNC_DATABASE_URL.split('?')[0]
+
 # Create async engine with transaction pooler settings
 engine = create_async_engine(
-    ASYNC_DATABASE_URL,
+    clean_url,
     pool_size=10,
     max_overflow=5,
     pool_timeout=30,
@@ -27,6 +37,7 @@ engine = create_async_engine(
     connect_args={
         "statement_cache_size": 0,  # CRITICAL: Required for transaction pooler
         "command_timeout": 30,
+        "ssl": ssl_context,
     }
 )
 
