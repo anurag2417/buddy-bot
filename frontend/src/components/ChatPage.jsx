@@ -268,21 +268,21 @@ export default function ChatPage() {
     <div className="flex flex-wrap gap-2 justify-center mb-4">
       <button
         onClick={() => sendMessage("/quiz")}
-        className="flex items-center gap-2 px-4 py-2 bg-amber-100 hover:bg-amber-200 text-amber-800 rounded-full font-semibold text-sm transition-all"
+        className="flex items-center gap-2 px-4 py-2 bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 rounded-full font-semibold text-sm transition-all border border-amber-500/20"
       >
         <Sparkles className="w-4 h-4" />
         Start Quiz
       </button>
       <button
         onClick={() => sendMessage("Tell me a story")}
-        className="flex items-center gap-2 px-4 py-2 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-full font-semibold text-sm transition-all"
+        className="flex items-center gap-2 px-4 py-2 bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 rounded-full font-semibold text-sm transition-all border border-purple-500/20"
       >
         <BookOpen className="w-4 h-4" />
         Story Time
       </button>
       <button
         onClick={() => sendMessage("What can you help me learn about?")}
-        className="flex items-center gap-2 px-4 py-2 bg-emerald-100 hover:bg-emerald-200 text-emerald-800 rounded-full font-semibold text-sm transition-all"
+        className="flex items-center gap-2 px-4 py-2 bg-emerald-500/15 hover:bg-emerald-500/25 text-emerald-300 rounded-full font-semibold text-sm transition-all border border-emerald-500/20"
       >
         <Search className="w-4 h-4" />
         Learn Something
@@ -295,13 +295,13 @@ export default function ChatPage() {
     if (!followups || followups.length === 0) return null;
     
     return (
-      <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-emerald-200">
-        <HelpCircle className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-1" />
+      <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-emerald-700/30">
+        <HelpCircle className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-1" />
         {followups.map((followup, idx) => (
           <button
             key={idx}
             onClick={() => onSelect(followup)}
-            className="px-3 py-1.5 bg-white/80 hover:bg-emerald-50 text-emerald-700 rounded-full text-sm font-medium border border-emerald-200 hover:border-emerald-400 transition-all"
+            className="px-3 py-1.5 bg-slate-800/80 hover:bg-emerald-500/20 text-emerald-300 rounded-full text-sm font-medium border border-emerald-500/30 hover:border-emerald-400/50 transition-all"
           >
             {followup}
           </button>
@@ -319,7 +319,7 @@ export default function ChatPage() {
         <div className="flex justify-center mt-4">
           <button
             onClick={handleNextQuestion}
-            className="px-6 py-3 bg-sky-500 hover:bg-sky-600 text-white rounded-full font-bold text-lg shadow-lg transition-all"
+            className="px-6 py-3 bg-sky-500 hover:bg-sky-400 text-white rounded-full font-bold text-lg shadow-lg transition-all"
           >
             {quizState.currentQuestion + 1 >= quizState.total_questions ? "See Results! 🏆" : "Next Question →"}
           </button>
@@ -333,7 +333,7 @@ export default function ChatPage() {
           <button
             key={opt}
             onClick={() => handleQuizAnswer(opt)}
-            className="px-6 py-4 bg-white hover:bg-sky-50 border-2 border-sky-200 hover:border-sky-400 text-sky-800 rounded-2xl font-bold text-xl transition-all shadow-sm hover:shadow-md"
+            className="px-6 py-4 bg-slate-800 hover:bg-sky-500/20 border border-sky-500/30 hover:border-sky-400/60 text-sky-300 rounded-2xl font-bold text-xl transition-all shadow-sm hover:shadow-md"
           >
             {opt}
           </button>
@@ -348,13 +348,13 @@ export default function ChatPage() {
     
     return (
       <div className="space-y-2 mt-4">
-        <p className="text-center text-purple-600 font-semibold text-sm">What do you want to do?</p>
+        <p className="text-center text-purple-400 font-semibold text-sm">What do you want to do?</p>
         {storyState.choices.map((choice, idx) => (
           <button
             key={idx}
             onClick={() => handleStoryChoice(idx + 1)}
             disabled={loading}
-            className="w-full px-5 py-3 bg-purple-100 hover:bg-purple-200 text-purple-800 rounded-xl font-medium text-left transition-all border-2 border-purple-200 hover:border-purple-400 disabled:opacity-50"
+            className="w-full px-5 py-3 bg-purple-500/15 hover:bg-purple-500/25 text-purple-300 rounded-xl font-medium text-left transition-all border border-purple-500/30 hover:border-purple-400/60 disabled:opacity-50"
           >
             <span className="font-bold">{idx + 1}.</span> {choice}
           </button>
@@ -366,30 +366,30 @@ export default function ChatPage() {
   return (
     <div
       data-testid="chat-page"
-      className="h-screen flex bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-100 via-white to-slate-50"
+      className="h-screen flex bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950"
     >
       {/* Sidebar */}
       <aside
         data-testid="chat-sidebar"
         className={`${
           sidebarOpen ? "w-72" : "w-0"
-        } transition-all duration-300 overflow-hidden bg-white/70 backdrop-blur-xl border-r border-white/40 flex flex-col`}
+        } transition-all duration-300 overflow-hidden bg-slate-900/70 backdrop-blur-xl border-r border-slate-700/50 flex flex-col`}
       >
-        <div className="p-5 border-b border-slate-100">
+        <div className="p-5 border-b border-slate-700/50">
           <div className="flex items-center gap-3 mb-5">
             <img
               src={BOT_AVATAR}
               alt="BuddyBot"
-              className="w-11 h-11 rounded-full border-2 border-white shadow-md"
+              className="w-11 h-11 rounded-full border-2 border-slate-700 shadow-md"
             />
-            <h1 className="font-['Nunito'] text-2xl font-extrabold text-sky-900 tracking-tight">
+            <h1 className="font-['Nunito'] text-2xl font-extrabold text-white tracking-tight">
               BuddyBot
             </h1>
           </div>
           <button
             data-testid="new-chat-btn"
             onClick={startNewChat}
-            className="w-full flex items-center justify-center gap-2 bg-sky-400 hover:bg-sky-500 text-white rounded-full py-3.5 px-5 text-lg font-bold shadow-[0_4px_0_0_rgba(14,165,233,0.3)] hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(14,165,233,0.3)] active:translate-y-[4px] active:shadow-none transition-all duration-150"
+            className="w-full flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-400 text-white rounded-full py-3.5 px-5 text-lg font-bold shadow-[0_4px_0_0_rgba(14,165,233,0.4)] hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(14,165,233,0.4)] active:translate-y-[4px] active:shadow-none transition-all duration-150"
           >
             <Plus className="w-5 h-5" strokeWidth={3} />
             New Chat
@@ -404,33 +404,33 @@ export default function ChatPage() {
               onClick={() => loadConversation(c.id)}
               className={`w-full text-left p-3.5 rounded-2xl transition-all duration-200 flex items-center gap-3 ${
                 activeConvId === c.id
-                  ? "bg-sky-100 text-sky-900 shadow-sm"
-                  : "hover:bg-slate-100 text-slate-600"
+                  ? "bg-sky-500/15 text-sky-300 border border-sky-500/30"
+                  : "hover:bg-slate-800 text-slate-400 border border-transparent"
               }`}
             >
               <MessageCircle
                 className={`w-5 h-5 flex-shrink-0 ${
-                  activeConvId === c.id ? "text-sky-500" : "text-slate-400"
+                  activeConvId === c.id ? "text-sky-400" : "text-slate-500"
                 }`}
                 strokeWidth={2.5}
               />
               <span className="truncate text-base font-medium">{c.title}</span>
               {c.has_flags && (
-                <span className="ml-auto flex-shrink-0 w-2.5 h-2.5 bg-rose-400 rounded-full" />
+                <span className="ml-auto flex-shrink-0 w-2.5 h-2.5 bg-rose-500 rounded-full" />
               )}
             </button>
           ))}
           {conversations.length === 0 && (
-            <p className="text-center text-slate-400 text-base font-medium mt-8">
+            <p className="text-center text-slate-500 text-base font-medium mt-8">
               No chats yet! Start one above
             </p>
           )}
         </div>
 
-        <div className="p-4 border-t border-slate-100 space-y-2">
+        <div className="p-4 border-t border-slate-700/50 space-y-2">
           {user && (
-            <div className="flex items-center gap-2 p-2 text-sm text-slate-600">
-              <div className="w-8 h-8 rounded-full bg-sky-100 flex items-center justify-center text-sky-600 font-bold">
+            <div className="flex items-center gap-2 p-2 text-sm text-slate-400">
+              <div className="w-8 h-8 rounded-full bg-sky-500/15 flex items-center justify-center text-sky-400 font-bold">
                 {user.name?.charAt(0).toUpperCase() || 'U'}
               </div>
               <span className="truncate font-medium">{user.name || user.email}</span>
@@ -439,14 +439,14 @@ export default function ChatPage() {
           <a
             href="/parent"
             data-testid="parent-dashboard-link"
-            className="flex items-center gap-2.5 text-emerald-700 hover:text-emerald-800 font-semibold text-base transition-colors p-2.5 rounded-xl hover:bg-emerald-50"
+            className="flex items-center gap-2.5 text-emerald-400 hover:text-emerald-300 font-semibold text-base transition-colors p-2.5 rounded-xl hover:bg-emerald-500/10"
           >
             <Shield className="w-5 h-5" strokeWidth={2.5} />
             Parent Dashboard
           </a>
           <button
             onClick={logout}
-            className="w-full flex items-center gap-2.5 text-rose-600 hover:text-rose-700 font-semibold text-base transition-colors p-2.5 rounded-xl hover:bg-rose-50"
+            className="w-full flex items-center gap-2.5 text-rose-400 hover:text-rose-300 font-semibold text-base transition-colors p-2.5 rounded-xl hover:bg-rose-500/10"
           >
             <LogOut className="w-5 h-5" strokeWidth={2.5} />
             Log Out
@@ -459,12 +459,12 @@ export default function ChatPage() {
         {/* Header */}
         <header
           data-testid="chat-header"
-          className="flex items-center gap-4 px-6 py-4 bg-white/60 backdrop-blur-xl border-b border-white/40"
+          className="flex items-center gap-4 px-6 py-4 bg-slate-900/60 backdrop-blur-xl border-b border-slate-700/50"
         >
           <button
             data-testid="toggle-sidebar-btn"
             onClick={() => setSidebarOpen(!sidebarOpen)}
-            className="p-2 rounded-xl hover:bg-slate-100 transition-colors text-slate-500"
+            className="p-2 rounded-xl hover:bg-slate-800 transition-colors text-slate-400"
           >
             <ChevronLeft
               className={`w-6 h-6 transition-transform ${
@@ -476,15 +476,15 @@ export default function ChatPage() {
           <img
             src={BOT_AVATAR}
             alt="BuddyBot"
-            className="w-10 h-10 rounded-full border-2 border-white shadow-sm float-animation"
+            className="w-10 h-10 rounded-full border-2 border-slate-700 shadow-sm float-animation"
           />
           <div>
-            <h2 className="font-['Nunito'] text-xl font-bold text-slate-800">
+            <h2 className="font-['Nunito'] text-xl font-bold text-white">
               BuddyBot
-              {currentMode === "quiz" && <span className="ml-2 text-amber-500">🎯 Quiz Mode</span>}
-              {currentMode === "story" && <span className="ml-2 text-purple-500">📖 Story Mode</span>}
+              {currentMode === "quiz" && <span className="ml-2 text-amber-400">🎯 Quiz Mode</span>}
+              {currentMode === "story" && <span className="ml-2 text-purple-400">📖 Story Mode</span>}
             </h2>
-            <p className="text-sm font-medium text-emerald-500">
+            <p className="text-sm font-medium text-emerald-400">
               Online and ready to chat!
             </p>
           </div>
@@ -501,12 +501,12 @@ export default function ChatPage() {
                 <img
                   src={BOT_AVATAR}
                   alt="BuddyBot"
-                  className="w-28 h-28 rounded-full border-4 border-white shadow-lg mb-6 float-animation"
+                  className="w-28 h-28 rounded-full border-4 border-slate-700 shadow-lg mb-6 float-animation"
                 />
-                <h2 className="font-['Nunito'] text-3xl font-extrabold text-sky-900 mb-3">
+                <h2 className="font-['Nunito'] text-3xl font-extrabold text-white mb-3">
                   Hi there, friend!
                 </h2>
-                <p className="text-lg font-medium text-slate-500 text-center max-w-md mb-6">
+                <p className="text-lg font-medium text-slate-400 text-center max-w-md mb-6">
                   I'm BuddyBot, your friendly AI buddy! Ask me anything — I love talking about animals, space, games, and all sorts of fun stuff!
                 </p>
                 <QuickActions />
@@ -526,19 +526,19 @@ export default function ChatPage() {
                   <img
                     src={BOT_AVATAR}
                     alt="BuddyBot"
-                    className="w-10 h-10 rounded-full border-2 border-white shadow-sm flex-shrink-0"
+                    className="w-10 h-10 rounded-full border-2 border-slate-700 shadow-sm flex-shrink-0"
                   />
                 )}
                 <div
                   className={`max-w-[75%] p-4 md:p-5 text-lg font-medium leading-relaxed ${
                     msg.role === "user"
-                      ? "bg-sky-100 text-sky-900 rounded-[2rem] rounded-br-lg"
-                      : "bg-emerald-100 text-emerald-900 rounded-[2rem] rounded-bl-lg"
+                      ? "bg-sky-500/20 text-sky-100 rounded-[2rem] rounded-br-lg border border-sky-500/30"
+                      : "bg-emerald-500/15 text-emerald-100 rounded-[2rem] rounded-bl-lg border border-emerald-500/25"
                   } ${msg.blocked ? "opacity-60 line-through" : ""}`}
                 >
                   <div className="whitespace-pre-wrap">{msg.text}</div>
                   {msg.blocked && (
-                    <span className="block text-sm text-rose-500 font-semibold mt-2 no-underline" style={{textDecoration:'none'}}>
+                    <span className="block text-sm text-rose-400 font-semibold mt-2 no-underline" style={{textDecoration:'none'}}>
                       This message was filtered
                     </span>
                   )}
@@ -548,7 +548,7 @@ export default function ChatPage() {
                   )}
                 </div>
                 {msg.role === "user" && (
-                  <div className="w-10 h-10 rounded-full bg-amber-200 flex items-center justify-center flex-shrink-0 border-2 border-white shadow-sm text-xl">
+                  <div className="w-10 h-10 rounded-full bg-amber-500/20 flex items-center justify-center flex-shrink-0 border border-amber-500/30 shadow-sm text-xl">
                     <span role="img" aria-label="child">&#x1F9D2;</span>
                   </div>
                 )}
@@ -566,9 +566,9 @@ export default function ChatPage() {
                 <img
                   src={BOT_AVATAR}
                   alt="BuddyBot"
-                  className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
+                  className="w-10 h-10 rounded-full border-2 border-slate-700 shadow-sm"
                 />
-                <div className="bg-emerald-100 rounded-[2rem] rounded-bl-lg p-5 flex gap-1.5">
+                <div className="bg-emerald-500/15 rounded-[2rem] rounded-bl-lg p-5 flex gap-1.5 border border-emerald-500/25">
                   <span className="typing-dot w-3 h-3 bg-emerald-400 rounded-full inline-block" />
                   <span className="typing-dot w-3 h-3 bg-emerald-400 rounded-full inline-block" />
                   <span className="typing-dot w-3 h-3 bg-emerald-400 rounded-full inline-block" />
@@ -589,7 +589,7 @@ export default function ChatPage() {
           )}
           <div
             data-testid="chat-input-area"
-            className="max-w-3xl mx-auto flex items-center gap-3 bg-white rounded-full border-2 border-slate-200 p-2 pl-6 shadow-[0_8px_30px_rgb(0,0,0,0.04)] focus-within:border-sky-400 focus-within:ring-4 focus-within:ring-sky-100 transition-all"
+            className="max-w-3xl mx-auto flex items-center gap-3 bg-slate-800/80 rounded-full border border-slate-600 p-2 pl-6 shadow-[0_8px_30px_rgb(0,0,0,0.2)] focus-within:border-sky-500 focus-within:ring-4 focus-within:ring-sky-500/20 transition-all"
           >
             <input
               ref={inputRef}
@@ -602,14 +602,14 @@ export default function ChatPage() {
                 currentMode === "story" ? "Or type something to continue the story..." :
                 "Type your message here..."
               }
-              className="flex-1 bg-transparent outline-none text-lg font-medium text-slate-800 placeholder:text-slate-400"
+              className="flex-1 bg-transparent outline-none text-lg font-medium text-slate-200 placeholder:text-slate-500"
               disabled={loading}
             />
             <button
               data-testid="send-message-btn"
               onClick={() => sendMessage()}
               disabled={!input.trim() || loading}
-              className="bg-sky-400 hover:bg-sky-500 disabled:bg-slate-200 disabled:text-slate-400 text-white rounded-full p-3.5 shadow-[0_4px_0_0_rgba(14,165,233,0.3)] hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(14,165,233,0.3)] active:translate-y-[4px] active:shadow-none disabled:shadow-none disabled:translate-y-0 transition-all duration-150"
+              className="bg-sky-500 hover:bg-sky-400 disabled:bg-slate-700 disabled:text-slate-500 text-white rounded-full p-3.5 shadow-[0_4px_0_0_rgba(14,165,233,0.4)] hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(14,165,233,0.4)] active:translate-y-[4px] active:shadow-none disabled:shadow-none disabled:translate-y-0 transition-all duration-150"
             >
               <Send className="w-5 h-5" strokeWidth={3} />
             </button>

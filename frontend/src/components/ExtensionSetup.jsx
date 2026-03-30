@@ -81,7 +81,7 @@ export default function ExtensionSetup() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-emerald-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 flex items-center justify-center p-4">
       <div className="max-w-2xl w-full">
         {/* Progress Steps */}
         <div className="flex items-center justify-center mb-8">
@@ -92,7 +92,7 @@ export default function ExtensionSetup() {
                   className={`w-10 h-10 rounded-full flex items-center justify-center font-bold text-sm transition-all ${
                     step >= s
                       ? "bg-sky-500 text-white"
-                      : "bg-gray-200 text-gray-500"
+                      : "bg-slate-700 text-slate-400"
                   }`}
                 >
                   {step > s ? <CheckCircle className="w-5 h-5" /> : s}
@@ -100,7 +100,7 @@ export default function ExtensionSetup() {
                 {s < 3 && (
                   <div
                     className={`w-16 h-1 mx-2 rounded ${
-                      step > s ? "bg-sky-500" : "bg-gray-200"
+                      step > s ? "bg-sky-500" : "bg-slate-700"
                     }`}
                   />
                 )}
@@ -109,47 +109,47 @@ export default function ExtensionSetup() {
           </div>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12">
+        <div className="bg-slate-800/60 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.3)] border border-slate-700/50 p-8 md:p-12">
           {/* Step 1: Introduction */}
           {step === 1 && (
             <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-sky-400 to-emerald-400 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-sky-500 to-emerald-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
                 <Shield className="w-10 h-10 text-white" />
               </div>
-              <h1 className="text-3xl font-bold text-slate-800 mb-4">
+              <h1 className="text-3xl font-bold text-white mb-4">
                 One More Step to Keep Your Child Safe!
               </h1>
-              <p className="text-lg text-slate-600 mb-8">
-                Install the <strong>BuddyBot Safety Monitor</strong> browser extension to monitor your child's browsing activity across all tabs.
+              <p className="text-lg text-slate-300 mb-8">
+                Install the <strong className="text-white">BuddyBot Safety Monitor</strong> browser extension to monitor your child's browsing activity across all tabs.
               </p>
               
-              <div className="bg-slate-50 rounded-2xl p-6 mb-8">
-                <h3 className="font-semibold text-slate-700 mb-4">What does the extension do?</h3>
+              <div className="bg-slate-900/50 rounded-2xl p-6 mb-8 border border-slate-700/50">
+                <h3 className="font-semibold text-slate-200 mb-4">What does the extension do?</h3>
                 <div className="grid md:grid-cols-3 gap-4 text-sm">
-                  <div className="bg-white rounded-xl p-4">
-                    <div className="w-10 h-10 bg-sky-100 rounded-lg mx-auto mb-2 flex items-center justify-center">
-                      <Chrome className="w-5 h-5 text-sky-600" />
+                  <div className="bg-slate-800/80 rounded-xl p-4 border border-slate-700/50">
+                    <div className="w-10 h-10 bg-sky-500/15 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                      <Chrome className="w-5 h-5 text-sky-400" />
                     </div>
-                    <p className="text-slate-600">Monitors search queries on Google, Bing, YouTube & more</p>
+                    <p className="text-slate-300">Monitors search queries on Google, Bing, YouTube & more</p>
                   </div>
-                  <div className="bg-white rounded-xl p-4">
-                    <div className="w-10 h-10 bg-emerald-100 rounded-lg mx-auto mb-2 flex items-center justify-center">
-                      <AlertCircle className="w-5 h-5 text-emerald-600" />
+                  <div className="bg-slate-800/80 rounded-xl p-4 border border-slate-700/50">
+                    <div className="w-10 h-10 bg-emerald-500/15 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                      <AlertCircle className="w-5 h-5 text-emerald-400" />
                     </div>
-                    <p className="text-slate-600">Detects inappropriate content and alerts you instantly</p>
+                    <p className="text-slate-300">Detects inappropriate content and alerts you instantly</p>
                   </div>
-                  <div className="bg-white rounded-xl p-4">
-                    <div className="w-10 h-10 bg-purple-100 rounded-lg mx-auto mb-2 flex items-center justify-center">
-                      <Puzzle className="w-5 h-5 text-purple-600" />
+                  <div className="bg-slate-800/80 rounded-xl p-4 border border-slate-700/50">
+                    <div className="w-10 h-10 bg-purple-500/15 rounded-lg mx-auto mb-2 flex items-center justify-center">
+                      <Puzzle className="w-5 h-5 text-purple-400" />
                     </div>
-                    <p className="text-slate-600">Works even in incognito mode for complete protection</p>
+                    <p className="text-slate-300">Works even in incognito mode for complete protection</p>
                   </div>
                 </div>
               </div>
 
               <button
                 onClick={() => setStep(2)}
-                className="w-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-sky-600 hover:to-emerald-600 transition-all flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-sky-400 hover:to-emerald-400 transition-all flex items-center justify-center gap-2 shadow-lg"
               >
                 Continue to Install
                 <ArrowRight className="w-5 h-5" />
@@ -160,44 +160,44 @@ export default function ExtensionSetup() {
           {/* Step 2: Download Instructions */}
           {step === 2 && (
             <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-amber-400 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-orange-500 to-amber-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
                 <Download className="w-10 h-10 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-800 mb-4">
+              <h2 className="text-2xl font-bold text-white mb-4">
                 Install the Extension
               </h2>
-              <p className="text-slate-600 mb-8">
+              <p className="text-slate-300 mb-8">
                 Follow these steps to install the BuddyBot Safety Monitor:
               </p>
 
-              <div className="text-left bg-slate-50 rounded-2xl p-6 mb-8">
+              <div className="text-left bg-slate-900/50 rounded-2xl p-6 mb-8 border border-slate-700/50">
                 <ol className="space-y-4">
                   <li className="flex items-start gap-3">
                     <span className="w-7 h-7 bg-sky-500 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">1</span>
                     <div>
-                      <p className="font-medium text-slate-700">Download the Extension</p>
-                      <p className="text-sm text-slate-500">Click the button below to download the extension files</p>
+                      <p className="font-medium text-slate-200">Download the Extension</p>
+                      <p className="text-sm text-slate-400">Click the button below to download the extension files</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="w-7 h-7 bg-sky-500 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">2</span>
                     <div>
-                      <p className="font-medium text-slate-700">Open Chrome Extensions</p>
-                      <p className="text-sm text-slate-500">Go to <code className="bg-white px-2 py-1 rounded text-sky-600">chrome://extensions</code> in your browser</p>
+                      <p className="font-medium text-slate-200">Open Chrome Extensions</p>
+                      <p className="text-sm text-slate-400">Go to <code className="bg-slate-800 px-2 py-1 rounded text-sky-400 border border-slate-700">chrome://extensions</code> in your browser</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="w-7 h-7 bg-sky-500 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">3</span>
                     <div>
-                      <p className="font-medium text-slate-700">Enable Developer Mode</p>
-                      <p className="text-sm text-slate-500">Toggle "Developer mode" in the top right corner</p>
+                      <p className="font-medium text-slate-200">Enable Developer Mode</p>
+                      <p className="text-sm text-slate-400">Toggle "Developer mode" in the top right corner</p>
                     </div>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="w-7 h-7 bg-sky-500 text-white rounded-full flex items-center justify-center flex-shrink-0 font-bold text-sm">4</span>
                     <div>
-                      <p className="font-medium text-slate-700">Load the Extension</p>
-                      <p className="text-sm text-slate-500">Click "Load unpacked" and select the extracted extension folder</p>
+                      <p className="font-medium text-slate-200">Load the Extension</p>
+                      <p className="text-sm text-slate-400">Click "Load unpacked" and select the extracted extension folder</p>
                     </div>
                   </li>
                 </ol>
@@ -207,7 +207,7 @@ export default function ExtensionSetup() {
                 <a
                   href="/extension.zip"
                   download
-                  className="w-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-sky-600 hover:to-emerald-600 transition-all flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-sky-400 hover:to-emerald-400 transition-all flex items-center justify-center gap-2 shadow-lg"
                 >
                   <Download className="w-5 h-5" />
                   Download Extension
@@ -215,7 +215,7 @@ export default function ExtensionSetup() {
                 <button
                   onClick={handleCheckExtension}
                   disabled={checking}
-                  className="w-full bg-slate-100 text-slate-700 py-4 px-6 rounded-xl font-semibold text-lg hover:bg-slate-200 transition-all flex items-center justify-center gap-2"
+                  className="w-full bg-slate-700 text-slate-200 py-4 px-6 rounded-xl font-semibold text-lg hover:bg-slate-600 transition-all flex items-center justify-center gap-2 border border-slate-600"
                 >
                   {checking ? (
                     <>
@@ -236,18 +236,18 @@ export default function ExtensionSetup() {
           {/* Step 3: Manual Confirmation */}
           {step === 3 && (
             <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-amber-400 to-orange-400 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-amber-500 to-orange-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
                 <AlertCircle className="w-10 h-10 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-800 mb-4">
+              <h2 className="text-2xl font-bold text-white mb-4">
                 Extension Not Detected
               </h2>
-              <p className="text-slate-600 mb-8">
+              <p className="text-slate-300 mb-8">
                 We couldn't automatically detect the extension. If you've installed it, click below to continue.
               </p>
 
               {error && (
-                <div className="bg-red-50 text-red-600 p-4 rounded-xl mb-6">
+                <div className="bg-rose-500/10 text-rose-400 p-4 rounded-xl mb-6 border border-rose-500/20">
                   {error}
                 </div>
               )}
@@ -256,7 +256,7 @@ export default function ExtensionSetup() {
                 <button
                   onClick={handleManualConfirm}
                   disabled={checking}
-                  className="w-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-sky-600 hover:to-emerald-600 transition-all flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-sky-500 to-emerald-500 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-sky-400 hover:to-emerald-400 transition-all flex items-center justify-center gap-2 shadow-lg"
                 >
                   {checking ? (
                     <>
@@ -272,7 +272,7 @@ export default function ExtensionSetup() {
                 </button>
                 <button
                   onClick={() => setStep(2)}
-                  className="w-full bg-slate-100 text-slate-700 py-4 px-6 rounded-xl font-semibold text-lg hover:bg-slate-200 transition-all"
+                  className="w-full bg-slate-700 text-slate-200 py-4 px-6 rounded-xl font-semibold text-lg hover:bg-slate-600 transition-all border border-slate-600"
                 >
                   Back to Instructions
                 </button>
@@ -283,16 +283,16 @@ export default function ExtensionSetup() {
           {/* Step 4: Success */}
           {step === 4 && (
             <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-green-400 rounded-2xl mx-auto mb-6 flex items-center justify-center">
+              <div className="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-500 rounded-2xl mx-auto mb-6 flex items-center justify-center shadow-lg">
                 <CheckCircle className="w-10 h-10 text-white" />
               </div>
-              <h2 className="text-2xl font-bold text-slate-800 mb-4">
+              <h2 className="text-2xl font-bold text-white mb-4">
                 All Set! 🎉
               </h2>
-              <p className="text-slate-600 mb-8">
+              <p className="text-slate-300 mb-8">
                 The BuddyBot Safety Monitor extension is now active. Your child is protected!
               </p>
-              <div className="bg-emerald-50 text-emerald-700 p-4 rounded-xl">
+              <div className="bg-emerald-500/10 text-emerald-400 p-4 rounded-xl border border-emerald-500/20">
                 Redirecting you to the chat...
               </div>
             </div>

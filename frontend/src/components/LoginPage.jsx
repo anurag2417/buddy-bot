@@ -51,26 +51,26 @@ export default function LoginPage() {
   return (
     <div
       data-testid="login-page"
-      className="min-h-screen flex items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-100 via-white to-slate-50 px-4"
+      className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-950 via-slate-900 to-gray-950 px-4"
     >
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-100 mb-4">
-            <Shield className="w-10 h-10 text-emerald-500" strokeWidth={2.5} />
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-emerald-500/15 mb-4 glow-animation">
+            <Shield className="w-10 h-10 text-emerald-400" strokeWidth={2.5} />
           </div>
-          <h1 className="font-['Nunito'] text-3xl font-extrabold text-sky-900">
+          <h1 className="font-['Nunito'] text-3xl font-extrabold text-white">
             {isRegister ? "Create Parent Account" : "Parent Login"}
           </h1>
-          <p className="text-base font-medium text-slate-500 mt-2">
+          <p className="text-base font-medium text-slate-400 mt-2">
             {isRegister ? "Set up your account to keep your child safe" : "Access your BuddyBot parent dashboard"}
           </p>
         </div>
 
-        <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.06)] border-2 border-slate-100/50 p-8">
+        <div className="bg-slate-800/60 backdrop-blur-xl rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.3)] border border-slate-700/50 p-8">
           <form onSubmit={handleSubmit} className="space-y-4">
             {isRegister && (
               <div className="relative">
-                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" strokeWidth={2.5} />
+                <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" strokeWidth={2.5} />
                 <input
                   data-testid="register-name-input"
                   type="text"
@@ -78,13 +78,13 @@ export default function LoginPage() {
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your name"
                   required
-                  className="w-full pl-12 pr-4 py-3.5 rounded-full border-2 border-slate-200 text-base font-medium focus:border-sky-400 focus:ring-4 focus:ring-sky-100 outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-3.5 rounded-full border border-slate-600 bg-slate-900/50 text-slate-200 text-base font-medium focus:border-sky-500 focus:ring-4 focus:ring-sky-500/20 outline-none transition-all placeholder:text-slate-500"
                 />
               </div>
             )}
 
             <div className="relative">
-              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" strokeWidth={2.5} />
+              <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" strokeWidth={2.5} />
               <input
                 data-testid="login-email-input"
                 type="email"
@@ -92,26 +92,26 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
                 required
-                className="w-full pl-12 pr-4 py-3.5 rounded-full border-2 border-slate-200 text-base font-medium focus:border-sky-400 focus:ring-4 focus:ring-sky-100 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3.5 rounded-full border border-slate-600 bg-slate-900/50 text-slate-200 text-base font-medium focus:border-sky-500 focus:ring-4 focus:ring-sky-500/20 outline-none transition-all placeholder:text-slate-500"
               />
             </div>
 
             {isRegister && (
               <div className="relative">
-                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" strokeWidth={2.5} />
+                <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" strokeWidth={2.5} />
                 <input
                   data-testid="register-phone-input"
                   type="tel"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="Phone number (optional)"
-                  className="w-full pl-12 pr-4 py-3.5 rounded-full border-2 border-slate-200 text-base font-medium focus:border-sky-400 focus:ring-4 focus:ring-sky-100 outline-none transition-all"
+                  className="w-full pl-12 pr-4 py-3.5 rounded-full border border-slate-600 bg-slate-900/50 text-slate-200 text-base font-medium focus:border-sky-500 focus:ring-4 focus:ring-sky-500/20 outline-none transition-all placeholder:text-slate-500"
                 />
               </div>
             )}
 
             <div className="relative">
-              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" strokeWidth={2.5} />
+              <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500" strokeWidth={2.5} />
               <input
                 data-testid="login-password-input"
                 type="password"
@@ -120,12 +120,12 @@ export default function LoginPage() {
                 placeholder="Password"
                 required
                 minLength={6}
-                className="w-full pl-12 pr-4 py-3.5 rounded-full border-2 border-slate-200 text-base font-medium focus:border-sky-400 focus:ring-4 focus:ring-sky-100 outline-none transition-all"
+                className="w-full pl-12 pr-4 py-3.5 rounded-full border border-slate-600 bg-slate-900/50 text-slate-200 text-base font-medium focus:border-sky-500 focus:ring-4 focus:ring-sky-500/20 outline-none transition-all placeholder:text-slate-500"
               />
             </div>
 
             {error && (
-              <p data-testid="auth-error" className="text-rose-500 text-sm font-semibold text-center bg-rose-50 rounded-xl p-3">
+              <p data-testid="auth-error" className="text-rose-400 text-sm font-semibold text-center bg-rose-500/10 border border-rose-500/20 rounded-xl p-3">
                 {error}
               </p>
             )}
@@ -134,7 +134,7 @@ export default function LoginPage() {
               data-testid="auth-submit-btn"
               type="submit"
               disabled={loading}
-              className="w-full flex items-center justify-center gap-2 bg-sky-400 hover:bg-sky-500 text-white rounded-full py-4 text-lg font-bold shadow-[0_4px_0_0_rgba(14,165,233,0.3)] hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(14,165,233,0.3)] active:translate-y-[4px] active:shadow-none disabled:opacity-50 transition-all duration-150"
+              className="w-full flex items-center justify-center gap-2 bg-sky-500 hover:bg-sky-400 text-white rounded-full py-4 text-lg font-bold shadow-[0_4px_0_0_rgba(14,165,233,0.4)] hover:translate-y-[2px] hover:shadow-[0_2px_0_0_rgba(14,165,233,0.4)] active:translate-y-[4px] active:shadow-none disabled:opacity-50 transition-all duration-150"
             >
               {loading ? "Please wait..." : (isRegister ? "Create Account" : "Sign In")}
               <ArrowRight className="w-5 h-5" strokeWidth={3} />
@@ -142,15 +142,15 @@ export default function LoginPage() {
           </form>
 
           <div className="my-5 flex items-center gap-3">
-            <div className="flex-1 h-px bg-slate-200" />
-            <span className="text-sm font-semibold text-slate-400">OR</span>
-            <div className="flex-1 h-px bg-slate-200" />
+            <div className="flex-1 h-px bg-slate-700" />
+            <span className="text-sm font-semibold text-slate-500">OR</span>
+            <div className="flex-1 h-px bg-slate-700" />
           </div>
 
           <button
             data-testid="google-login-btn"
             onClick={handleGoogleLogin}
-            className="w-full flex items-center justify-center gap-3 bg-white hover:bg-slate-50 text-slate-700 rounded-full py-3.5 text-base font-bold border-2 border-slate-200 hover:border-slate-300 transition-all"
+            className="w-full flex items-center justify-center gap-3 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-full py-3.5 text-base font-bold border border-slate-600 hover:border-slate-500 transition-all"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
@@ -161,12 +161,12 @@ export default function LoginPage() {
             Continue with Google
           </button>
 
-          <p className="text-center text-sm font-semibold text-slate-500 mt-5">
+          <p className="text-center text-sm font-semibold text-slate-400 mt-5">
             {isRegister ? "Already have an account?" : "Don't have an account?"}{" "}
             <button
               data-testid="toggle-auth-mode"
               onClick={() => { setIsRegister(!isRegister); setError(""); }}
-              className="text-sky-500 hover:text-sky-600 font-bold"
+              className="text-sky-400 hover:text-sky-300 font-bold"
             >
               {isRegister ? "Sign In" : "Create Account"}
             </button>
@@ -174,7 +174,7 @@ export default function LoginPage() {
         </div>
 
         <div className="text-center mt-6">
-          <Link to="/" data-testid="go-to-chat-link" className="text-sm font-semibold text-emerald-600 hover:text-emerald-700">
+          <Link to="/" data-testid="go-to-chat-link" className="text-sm font-semibold text-emerald-400 hover:text-emerald-300">
             Go to BuddyBot Chat (for kids)
           </Link>
         </div>
