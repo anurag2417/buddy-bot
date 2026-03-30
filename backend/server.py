@@ -2061,6 +2061,17 @@ async def browsing_analysis(request: Request, device_id: Optional[str] = None, d
         "incognito_count": incognito_count
     }
 
+@api_router.get("/init-db")
+async def init_db():
+    try:
+        from database import engine, Base
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.create_all)
+        return {"status": "success", "message": "All database tables safely created!"}
+    except Exception as e:
+        import traceback
+        return {"status": "error", "message": str(e), "traceback": traceback.format_exc()}
+
 
 @api_router.get("/")
 async def root():
